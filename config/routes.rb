@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :acceptances, only: [:new, :create]
   get 'top/index'
   resources :rooms
   resources :books
