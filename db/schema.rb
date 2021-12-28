@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_124610) do
+ActiveRecord::Schema.define(version: 2021_12_27_081127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,42 @@ ActiveRecord::Schema.define(version: 2021_12_13_124610) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.string "user_name"
+    t.string "user_email"
+    t.date "reserved_date"
+    t.float "usage_time"
+    t.integer "room_id"
+    t.integer "people"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_email"], name: "index_entries_on_user_email", unique: true
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name", default: "食事の名前"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description", default: "食事の内容を記述"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "place"
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "term_of_use"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "email"
+    t.date "birthday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
