@@ -8,11 +8,18 @@ class Room < ApplicationRecord
   validates :number, numericality: { less_than_or_equal_to: 30, greater_than_or_equal_to: 5}
   validate :number_check
 
+  before_validation :trim_name
+
   private
   def number_check
     unless self.number % 5 == 0
       errors.add(:number, "収容人数は5の倍数で指定してください。")
     end
+  end
+
+  def trim_name
+   self.name = self.name.gsub(/(^[[:space:]]+)|([[:space:]]+$)/, '')
+   self.name = self.name.gsub(/\s/, '_')
   end
 
 end
