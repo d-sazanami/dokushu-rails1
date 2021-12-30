@@ -7,8 +7,7 @@ class Book < ApplicationRecord
   before_save MessageOut
   before_validation MessageOut
 
-  has_many :rentals
-  has_many :users, through: :rentals
+  has_many :pictures, as: :imageable
 
   private
   def find_message
