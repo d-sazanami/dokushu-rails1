@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_055840) do
+ActiveRecord::Schema.define(version: 2021_12_30_233736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "prefecture"
+    t.string "city"
+    t.string "town"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -47,11 +55,59 @@ ActiveRecord::Schema.define(version: 2021_12_29_055840) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "members", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_members_on_project_id"
+  end
+
+  create_table "pets", force: :cascade do |t|
+    t.string "type"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.string "path_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "project_managers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_manager_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_manager_id"], name: "index_projects_on_project_manager_id"
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.date "rental_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_rentals_on_book_id"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -73,4 +129,14 @@ ActiveRecord::Schema.define(version: 2021_12_29_055840) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "weathers", force: :cascade do |t|
+    t.integer "today_temp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "members", "projects"
+  add_foreign_key "projects", "project_managers"
+  add_foreign_key "rentals", "books"
+  add_foreign_key "rentals", "users"
 end
