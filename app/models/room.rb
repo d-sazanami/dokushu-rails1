@@ -10,7 +10,7 @@ class Room < ApplicationRecord
 
   before_validation :trim_name
 
-  has_many :entries
+  has_many :entries, dependent: :destroy
 
   private
   def number_check
