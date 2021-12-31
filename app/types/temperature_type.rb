@@ -1,14 +1,13 @@
-class TemperatureType < ActiveRecord::Type::Integer
+class TemperatureType < ActiveRecord::Type::Value
   def cast(temperature)
-    temp = temperature.split('F')
+    degree = temperature.degree
+    unit = temperature.unit
 
-    if !/\D/.match?(temp[0]) && temp.length < 2
-      degree = temp[0].to_f
-      super(degree = (degree -32) / 1.8)
+    if unit == 'F'
+     super(degree = (degree - 32) / 1.8) 
     else
-      super
+      super(degree)
     end
-    
   end
   
 end
