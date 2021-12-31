@@ -10,6 +10,8 @@ class Room < ApplicationRecord
 
   before_validation :trim_name
 
+  has_many :entries
+
   private
   def number_check
     unless self.number % 5 == 0
