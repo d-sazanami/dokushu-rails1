@@ -11,6 +11,11 @@ class EntrisController < ApplicationController
     @entry = Entry.new
   end
 
+  def confirm
+    
+  end
+  
+
   # POST /entries or /entries.json
   def create
     @entry = Entry.new(entry_params)

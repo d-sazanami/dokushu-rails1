@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   resources :rooms
   resources :books
   get 'greetings/index'
-  resources :entries, path: :rentals, only: [:new, :create, :destroy, :index]
+  resources :entries, path: :rentals, only: [:new, :create, :destroy, :index] do
+    post :confirm, on: :collection
+  end
 end
