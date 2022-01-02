@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :rooms
   resources :books
   get 'greetings/index'
-  resources :entries, only: [:new, :create, :destroy, :index]
+  resources :entries, path: :rentals, only: [:new, :create, :destroy, :index]
 end
