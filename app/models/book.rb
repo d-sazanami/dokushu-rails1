@@ -8,6 +8,7 @@ class Book < ApplicationRecord
   before_validation MessageOut
 
   has_many :pictures, as: :imageable
+  has_many :rentals
 
   private
   def find_message
