@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :acceptances, only: [:new, :create]
   root to: 'top#index'
   get 'top/index'
