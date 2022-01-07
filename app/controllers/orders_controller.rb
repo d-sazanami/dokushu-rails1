@@ -13,37 +13,31 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @order.order_details.new
   end
 
   # GET /orders/1/edit
   def edit
+    @order.order_details.new
   end
 
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.save
+      redirect_to @order, notice: "Order was successfully created."
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.update(order_params)
+      redirect_to @order, notice: "Order was successfully updated."
+    else
+      render :edit
     end
   end
 
@@ -64,6 +58,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:name, :order_date)
+      params.require(:order).permit(:name, :order_date,
+        order_details_attributes: [:id, :item_name, :count])
     end
 end

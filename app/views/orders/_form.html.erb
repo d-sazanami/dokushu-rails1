@@ -21,6 +21,14 @@
     <%= form.date_select :order_date %>
   </div>
 
+  <div class="field">
+    <%= "item name - Count" %><br>
+    <%= form.fields_for :order_details do |detail| %>
+      <%= detail.text_field :item_name %>
+      <%= detail.number_field :count %><br>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
