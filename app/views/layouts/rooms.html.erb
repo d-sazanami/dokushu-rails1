@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myapp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <ul>
+        <li><%= link_to "トップ", top_index_path %></li>
+        <li><%= link_to "会議室登録", new_room_path %></li>
+        <li><%= link_to "会議室一覧", rooms_path %></li>
+      </ul>
+    </header>
+    <%= yield %>
+    <hr>
+    <footer>
+      <h1>フッター</h1>
+    </footer>
+  </body>
+</html>
