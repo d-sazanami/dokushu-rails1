@@ -17,6 +17,11 @@ class EntriesController < ApplicationController
     end
   end
 
+  def show
+    @entry = Entry.find(params[:id])
+  end
+  
+
   def destroy
     @entry.destroy
     respond_to do |format|

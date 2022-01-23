@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User Name:</strong>
+  <%= @entry.user_name %>
+</p>
+
+<p>
+  <strong>User email:</strong>
+  <%= @entry.user_email %>
+</p>
+
+<p>
+  <strong>reseerved_date:</strong>
+  <%= @entry.reserved_date %>
+</p>
+
+<p>
+  <strong>Usage time:</strong>
+  <%= @entry.usage_time %>
+</p>
+
+<p>
+  <strong>People:</strong>
+  <%= @entry.people %>
+</p>
+
+<%= link_to 'Back', "/rooms/#{@entry.room_id}" %>
