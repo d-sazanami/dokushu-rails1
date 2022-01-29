@@ -23,9 +23,10 @@ class EntriesController < ApplicationController
   
 
   def destroy
+    @entry ||= Entry.find(params[:id])
     @entry.destroy
     respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Entry was successfully destroyed." }
+      format.html { redirect_to @entry.room, notice: "Entry was successfully destroyed." }
       format.json { head :no_content }
     end
   end
