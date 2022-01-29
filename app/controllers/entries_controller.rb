@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   def new
-    @entry = Entry.new
+    @entry = Entry.new(room_id: params[:room_id])
   end
 
   def create
@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, notice: "Entry was successfully created." }
+        format.html { redirect_to @entry.room, notice: "Entry was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
