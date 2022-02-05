@@ -1,4 +1,7 @@
 class EntriesController < ApplicationController
+  before_action :set_entry, only: [:destroy]
+  before_action :set_entry_params, only: [:confirm, :confirm_back, :create]
+
   def new
     @entry = Entry.new(room_id: params[:room_id])
   end
