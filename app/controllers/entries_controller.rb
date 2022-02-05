@@ -7,8 +7,6 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(entry_params)
-
     respond_to do |format|
       if @entry.save
         format.html { redirect_to @entry.room, notice: "Entry was successfully created." }
@@ -39,19 +37,21 @@ class EntriesController < ApplicationController
   end
 
   def confirm
-    @entry = Entry.new(entry_params)
     if @entry.invalid?
       render :new
     end
   end
 
   def confirm_back
-    @entry = Entry.new(entry_params)
     render :new
   end
 
   private
   def entry_params
     params.require(:entry).permit(:user_name, :user_email, :reserved_date, :usage_time, :room_id, :people)
+  end
+
+  def set_entry_params
+    @entry = Entry.new(entry_params)
   end
 end
