@@ -36,6 +36,15 @@ class EntriesController < ApplicationController
   end
 
   def confirm
+    @entry = Entry.new(entry_params)
+    if @entry.invalid?
+      render :new
+    end
+  end
+
+  def confirm_back
+    @entry = Entry.new(entry_params)
+    render :new
   end
 
   private

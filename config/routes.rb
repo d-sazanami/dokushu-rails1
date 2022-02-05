@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get 'greetings/index'
   resources :entries, path: :rentals, only: [:new, :create, :destroy, :index, :show] do
     post :confirm, on: :collection
+    post :confirm_back, on: :collection
   end
 end

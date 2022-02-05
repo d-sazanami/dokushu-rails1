@@ -6,7 +6,7 @@ class Entry < ApplicationRecord
   belongs_to :room
 
   validates :user_name, presence: true
-  validates :user_email, email_address:true, presence: true
+  validates :user_email, email_address: true, presence: true
   validates :reserved_date, presence: true
   validates :usage_time, presence: true
   validates :people, presence: true, numericality: true
